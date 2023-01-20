@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Submission
+ * Plugin Name:       Submission Plugin
  * Plugin URI:        https://github.com/AbhijitSarker
  * Description:       Submit Your thoughts and get a email Reply.
  * Version:           1.0
@@ -15,6 +15,32 @@
  * Domain Path:       /languages
  */
 
+
 if (!defined('ABSPATH')) {
     die;
+}
+
+
+if (!class_exists('SubmissionPlugin')) {
+    class SubmissionPlugin
+    {
+        public function __construct()
+        {
+            define('MY_PLUGIN_PATH', plugin_dir_path(__FILE__));
+            // define('MY_PLUGIN_URL', plugin_dir_url(__FILE__));
+
+            require_once(MY_PLUGIN_PATH . '/vendor/autoload.php');
+        }
+
+        public function initialize()
+        {
+            include_once MY_PLUGIN_PATH . 'includes/utilities.php';
+
+            include_once MY_PLUGIN_PATH . 'includes/options-page.php';
+        }
+    }
+
+    $submissionPlugin = new SubmissionPlugin;
+
+    $submissionPlugin->initialize();
 }
